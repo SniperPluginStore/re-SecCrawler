@@ -23,7 +23,6 @@ func (crawler EdgeForum) Config() register.CrawlerConfig {
 // Get 获取棱角社区前24小时内文章。
 func (crawler EdgeForum) Get() ([][]string, error) {
 	client := utils.CrawlerClient()
-
 	req, err := http.NewRequest("GET", "https://forum.ywhack.com/forumdisplay.php?fid=59&orderby=lastpost&filter=86400", nil)
 	if err != nil {
 		return nil, err
