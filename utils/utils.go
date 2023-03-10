@@ -2,6 +2,7 @@ package utils
 
 import (
 	"SecCrawler/config"
+	"crypto/tls"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -61,8 +62,10 @@ func CrawlerClient() *http.Client {
 	if config.Cfg.Proxy.CrawlerProxyEnabled {
 		return proxyClient(4)
 	}
+	tr := &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: true}}
 	client := &http.Client{
-		Timeout: time.Duration(4) * time.Second,
+		Timeout:   time.Duration(4) * time.Second,
+		Transport: tr,
 	}
 	return client
 }
